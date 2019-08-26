@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start":"node src/server/index.js"
+    "start":"node src/server/index.js",
+    "heroku-postbuild": "./node_modules/.bin/webpack -p"
   },
   "keywords": [],
   "author": "",
