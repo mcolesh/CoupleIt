@@ -1,1 +1,4 @@
-git push heroku master
+Push Git Repository into heroku - git push heroku master
+Get server logs - heroku logs --tail / heroku logs -n 200
+Install build manager - heroku plugins:install heroku-builds
+Cancel build - heroku builds:cancel -a coupleit
