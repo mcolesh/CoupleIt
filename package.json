@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "postinstall": "webpack -p",
-    "start":npm-run-all --parallel watch:server watch:build,
+    "start":"npm-run-all --parallel watch:server watch:build",
 	"watch:server": "node src/server/index.js",
     "watch:build": "./node_modules/.bin/webpack -w"
   },
