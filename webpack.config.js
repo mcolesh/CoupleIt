@@ -1,6 +1,6 @@
 var webpack = require('webpack');
 var path = require('path');
-
+var nodeExternals = require('webpack-node-externals')
 var BUILD_DIR = path.resolve(__dirname, './build');
 var APP_DIR = path.resolve(__dirname, './src/client');
 
