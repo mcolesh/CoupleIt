@@ -6,7 +6,7 @@
   "scripts": {
     "postinstall": "webpack -p",
     "start":"node src/server/index.js",
-	"dev": "npm-run-all -p watch:server watch:build"
+	"dev": "npm-run-all -p watch:server watch:build",
 	"watch:server": "node src/server/index.js",
     "watch:build": "./node_modules/.bin/webpack -w"
   },
