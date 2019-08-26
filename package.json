@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "postinstall": "webpack -p",
+    "postbuild": "webpack -p",
     "start":"node src/server/index.js",
 	"dev": "./node_modules/.bin/webpack -w"
   },
@@ -42,6 +42,10 @@
     "mocha": "^6.2.0"
   },
   "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mcolesh/CoupleIt.git"
+	},
   "engines": {
     "node": "12.6.0",
     "npm": "6.9.0"

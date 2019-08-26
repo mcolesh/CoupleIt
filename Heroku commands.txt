@@ -1,4 +1,5 @@
-login - heroku login 
+login - heroku login
+delete app - heroku apps:destroy --confirm coupleit 
 Push Git Repository into heroku - git push heroku master
 Get server logs - heroku logs --tail / heroku logs -n 200
 Install build manager - heroku plugins:install heroku-builds
