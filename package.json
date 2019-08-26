@@ -4,9 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "./node_modules/.bin/webpack -w",
     "postinstall": "webpack -p",
-    "start": "node src/server/index.js"
+    "start": "node src/server/index.js & ./node_modules/.bin/webpack -w"
   },
   "keywords": [],
   "author": "",
@@ -43,7 +42,7 @@
   },
   "devDependencies": {},
   "engines": {
-    "node": ">=12.6.0",
-    "npm": ">=6.9.0"
+    "node": "12.6.0",
+    "npm": "6.9.0"
   }
 }
