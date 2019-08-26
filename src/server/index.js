@@ -23,5 +23,7 @@ app.use('/api/groups', groups);
 var path = require('path');
 app.use(express.static(__dirname + '/public'));
 
+
 app.listen(port); //listens on port 8080
 console.log('Server started')
+
