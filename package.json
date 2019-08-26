@@ -4,9 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "postbuild": "webpack -p",
+    "postinstall": "./node_modules/.bin/webpack -w",
     "start":"node src/server/index.js",
-	"dev": "./node_modules/.bin/webpack -w"
   },
   "keywords": [],
   "author": "",
