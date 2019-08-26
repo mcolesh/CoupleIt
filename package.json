@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start":"echo LOLOLOLOLOLOL",
-    "postinstall": "./node_modules/.bin/webpack -p"
+    "start":"node src/server/index.js"
   },
   "keywords": [],
   "author": "",
