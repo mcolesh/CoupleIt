@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../scss/bootstrap.min.css';
-import '../scss/App.css';
+import '../scss/app.css';
 import CreateNewGroupPage from './CreateNewGroupPage';
 import SearchFromExistingGroupsPage from './SearchFromExistingGroupsPage';
 

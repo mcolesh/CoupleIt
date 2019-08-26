@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../scss/bootstrap.min.css';
 import '../scss/application.scss';
-import '../scss/App.css';
+import '../scss/app.css';
 import { Scrollbars } from 'react-custom-scrollbars';
 
 class GroupMember {

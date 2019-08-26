@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Scrollbars } from 'react-custom-scrollbars';
 import Select from 'react-select';
 import '../scss/bootstrap.min.css';
-import '../scss/App.css';
+import '../scss/app.css';
 
 class GroupPage extends React.Component
 {
