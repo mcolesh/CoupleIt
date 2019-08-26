@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start":"node src/server/index.js",
-    "postinstall": "./node_modules/.bin/webpack"
+    "postinstall": "./node_modules/.bin/webpack -p"
   },
   "keywords": [],
   "author": "",
