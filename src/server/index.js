@@ -1,12 +1,10 @@
 var express = require('express');
-var cors = require('cors');
 var bodyParser = require('body-parser')
 var mongoose = require('mongoose');
-var port = process.env.PORT || 8080;
-//var mongoDB = 'mongodb://localhost:27017/groupsDB';
-//mongoose.connect(mongoDB, { useNewUrlParser: true });
+var mongoDB = 'mongodb://localhost:27017/groupsDB';
+mongoose.connect(mongoDB, { useNewUrlParser: true });
 var db = mongoose.connection;
-//db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 var app = express();
 
@@ -18,15 +16,11 @@ app.use(bodyParser.json())
 
 app.use(express.static(__dirname +'./../../')); //serves the index.html
 
-app.use('*', cors()) // todo: Add more restrictions
-
-//var groups = require('./groups.js');
-//app.use('/api/groups', groups);
+var groups = require('./groups.js');
+app.use('/api/groups', groups);
 
 var path = require('path');
 app.use(express.static(__dirname + '/public'));
+app.use('/SubGroupScheme',express.static(__dirname + '/public/images/SubGroupScheme'));
 
-
-app.listen(port); //listens on port 8080
-console.log('Server started')
-
+app.listen(3000); //listens on port 3000 -> http://localhost:3000/

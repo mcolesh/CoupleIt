@@ -1,12 +1,34 @@
 * {
   /*font-family:cursive;*/
   /*font-family: 'Proxima Nova Soft', 'Helvetica Neue', sans-serif;*/
-  font-family:"Comic Sans MS", cursive, sans-serif;
+  /*font-family:"Comic Sans MS", cursive, sans-serif;*/
+  font-family: 'Varela', sans-serif;
 }
 
 .App
 {
-  
+  background-image: url('/images/89517.jpg');
+  background-position: center;
+  min-height: 100%;
+  min-width: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.FirstRowMainPage{
+  padding-top:25%
+}
+
+.FirstRowSearchMainPage{
+  padding-top:8%
+}
+
+.FirstRowGroupPage{
+  padding-top:8%
+}
+
+.FirstRowCreateGroupPage{
+  padding-top:6%
 }
 
 .header-nightsky .hero p {
@@ -29,12 +51,17 @@ p {
 .hr {
   display: inline-block;
 }
+
 .hr:after {
   content: '';
   display: block;
   border-top: 1px solid;
   color: lightgrey;
   margin-top: 0.5em;
+}
+
+.Mylogo{
+  margin: 5 0 5 0;
 }
 
 .Page
@@ -44,8 +71,6 @@ p {
   background-size:20% 30%;
   */
   margin: 30px auto;
-  width: 80%;
-  font-family: 'Montserrat', sans-serif;
 }
 
 .LineStyle
@@ -147,26 +172,41 @@ p {
   background: #f8f9fa;
 }
 
-.LiMemberBaseState{
-  background: #f8f9fa;
-}
-
-.LiMemberClicked{
-  background: white;
-}
-
 .GroupMembersContainer:first-child{
   padding-top:0px;
 }
 
 .GroupsPageRow{
-  border: 5px solid rgb(42, 51, 173);
+  border: 1px solid lightgrey;
   border-radius: .5em;
   display: flex; /* or inline-flex */
   flex-direction: row;
   flex-wrap: nowrap;
   align-content: center;
   text-align: center;
+}
+
+.inBorder{
+  border: 1px solid lightgrey;
+  border-radius: .25em;
+}
+
+.list-group-searchPage{
+  padding: 6 14 6 6;
+}
+
+.list-group-searchPage .list-group-item
+{
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  margin-bottom: 0;
+  background:none;
+}
+
+.list-group-searchPage .list-group-item:last-child
+{
+  border-bottom:none;
 }
 
 .GroupPageHeader{
@@ -178,6 +218,7 @@ p {
   text-align: left;
   padding-right: 0px;
   margin-right: 0px;
+  position:relative;
 }
 
 .Results{
@@ -185,12 +226,9 @@ p {
   border: 1px solid #e7e7e8;
   padding: 20px;
   height: 100%; 
-  box-shadow: 0px 0px 5px #d6d5ef;
-}
-
-.ColGroupPageMembers{
-  padding: 0.35rem 0.25rem;
-  word-wrap: break-word;
+  opacity: 0.8;
+  background-color: white;
+  box-shadow: 5px 5px 4px #6666
 }
 
 .TextColorAndSize{
@@ -225,6 +263,37 @@ p {
   width: 175px;
 }
 
+.SubGroupsNotParticipating{
+  display: inline-flex;
+  list-style-type: none;
+  margin-left: 10px;
+  align-items:center;
+}
+
+.NotParticipatingSelect button{
+  border: none;
+  font-size: 16;
+  color: #6c757d;
+  width: 220px;
+  box-sizing: border-box;
+  border-color: rgb(204, 204, 204);
+  border-radius: 4px;
+  border-style: solid;
+  border-width: 1px;
+  transition: all 100ms ease 0s;
+  outline: 0px !important;
+  box-shadow: none;
+  -webkit-box-align: center;
+  align-items: center;
+  cursor: default;
+  display: flex;
+  flex-wrap: wrap;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  min-height: 38px;
+  position: relative;
+}
+
 .Option label{
   margin-bottom:0px;
 }
@@ -237,4 +306,15 @@ p {
 
 .TextGrey{
   color:#495057;
+}
+
+.SubGroupView{
+  max-width: 25%;
+  max-width: 25%
+}
+
+.Participants{
+  position: absolute;
+  bottom: 0;
+  left: 0;
 }

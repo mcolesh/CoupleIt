@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../scss/bootstrap.min.css';
 import '../scss/application.scss';
-import '../scss/app.css';
+import '../scss/App.css';
 import { Scrollbars } from 'react-custom-scrollbars';
 
 class GroupMember {
@@ -22,24 +22,45 @@ class FieldsAreFilled extends React.Component
 
     return <div>
             {this.props.groupNameIsUnique == false &&
+            <div>
                <div class="alert alert-warning alert-dismissible fade show padding-left-8" role="alert">
-                  <strong>Damn, group with same name already exists</strong>,<br /> please choose another name or delete existing..
+                  <strong>Damn, group with the same name already exists</strong>,<br /> please choose another name or delete existing..😢
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                  </button>
                </div>
+            </div>
+
             }
             {this.props.isNumberOfMembersGreaterOrEqualToThree == false &&
+            <div>
                 <div class="alert alert-info alert-dismissible fade show padding-left-8" role="alert">
-                    <strong>Group should include at least three members</strong>,<br /> less, would feel lonely, dont you agree ? ^_^ 
+                    <strong>Group should include at least three members</strong>,<br /> less, would feel lonely, don't you agree ? 😆 
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
+            </div>
             }
             {this.props.fieldsAreFilled == false &&
+            <div>
                 <div class="alert alert-danger alert-dismissible fade show padding-left-8" role="alert">
-                    <strong>All fields are mandatory</strong><br /> don't forget the gender fields.. ^_^ 
+                    <strong>All fields are mandatory</strong><br /> don't forget the gender fields.. 😏 
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
+            </div>
             }
             {
               this.props.groupNameIsUnique && this.props.isNumberOfMembersGreaterOrEqualToThree && this.props.fieldsAreFilled &&
-              <div class="alert alert-success alert-dismissible fade show padding-left-8" role="alert">
-              <strong>Group was created Succesfuly!!!</strong>,<br /> now the fun begins .. ^_^ 
+              <div>
+                <div class="alert alert-success alert-dismissible fade show padding-left-8" role="alert">
+                  <strong>Group was created Succesfuly!!!</strong>,<br /> now the fun begins.. 😉 
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
               </div>
             }
            </div>
@@ -185,8 +206,8 @@ class CreateNewGroupPage extends React.Component
     if (!this.state.isVisible)
       return null
 
-    return <div className="Page container-fluid text-secondary">
-                  <div className="PageRow row justify-content-center">
+    return <div className="container text-secondary">
+                  <div className="FirstRowCreateGroupPage row justify-content-center">
                       <div className="col-12 center-block text-center">
                       <h2 className="text-primary hr margin-buttom-20">
                       &nbsp;&nbsp;&nbsp;Create New Group:&nbsp;&nbsp;&nbsp; 
@@ -195,26 +216,29 @@ class CreateNewGroupPage extends React.Component
                   </div>
           
                   <div className="row justify-content-right">
-                      <div className="col-4 offset-md-4">
+                      <div className="col-3"></div>
+                      <div className="col-5">
                           <FieldsAreFilled groupName={this.state.GroupName} fieldsAreFilled={this.state.fieldsAreFilled}  isNumberOfMembersGreaterOrEqualToThree={this.state.isNumberOfMembersGreaterOrEqualToThree} groupNameIsUnique={this.state.groupNameIsUnique}/>  
                       </div>
                   </div>             
 
                   <div className="row justify-content-right">
-                                  <div className="col-3 offset-md-4">
+                                  <div className="col-3"></div>
+                                  <div className="col-4">
                                       <label>Group Name:</label>
                                       <input type="text" className="form-control" aria-describedby="My Group Name" onChange={(e)=>this.handleGroupNameChange(e)} value={this.state.GroupName}></input>
                                   </div>
                   </div>
 
                   <div className="PageRow row justify-content-right">
-                      <div className="col-3 offset-md-4">
+                      <div className="col-3"></div>
+                      <div className="col-4">
                       <label className="margin-bottom-10">Group Members:</label>
                       </div>
                   </div>
                   
                   <div className="padding-top-0 row justify-content-center">
-                    <div className="col-4 padding-0">
+                    <div className="col-6 padding-0">
                         <Scrollbars 
                             style={{height: 450 }}
                             renderTrackHorizontal={props => <div {...props} className="track-horizontal" style={{display:"none"}}/>}
@@ -225,7 +249,7 @@ class CreateNewGroupPage extends React.Component
                               {
                               this.state.GroupMembers.map((member,index)=>{
                                   return <div className="padding-bottom-10 row">
-                                                          <div className="col-9">
+                                                          <div className="col-8">
                                                               <div className="input-group" key={index}>
                                                               <input type="text" className="form-control" onChange={(e)=>this.handleMemberNameChange(e,index)} value={member.name}/>
                                                               </div>
@@ -233,11 +257,11 @@ class CreateNewGroupPage extends React.Component
                                                           <div className="col-1 Gender-inline padding-0 align-self-center">
                                                                 <label className="radio">
                                                                 <input type="radio" name={"Gender"+index} id={index+"Male"}/>
-                                                                <span><img style={{width: '14px', height: '18px'}} src="./images/Male.jpg"></img></span>
+                                                                <span><img style={{width: '14px', height: '18px'}} src="./images/Male.png"></img></span>
                                                                 </label>
                                                                 <label className="radio">
                                                                 <input type="radio" name={"Gender"+index} id={index+"Female"}/>
-                                                                <span><img style={{width: '14px', height: '18px'}} src="./images/Female.jpg"></img></span>
+                                                                <span><img style={{width: '14px', height: '18px'}} src="./images/Female.png"></img></span>
                                                                 </label>
                                                                 {this.state.deleteButtonEnabled &&
                                                                 <button  className="btn trashIcon" onClick={()=>this.handleRemove(index)}>
@@ -258,18 +282,18 @@ class CreateNewGroupPage extends React.Component
                   </div>
 
                   <div className="PageRow row justify-content-center">
-                  <div className="col-1 text-center">
-                          <button type="button" onClick={(e)=>this.handleSubmit(e)} className="btn btn-outline-primary btn-block">
+                  <div className="col-2 text-center">
+                          <button type="button" onClick={(e)=>this.handleSubmit(e)} className="btn btn-primary btn-block">
                           <span><strong><i class="fa fa-check"></i> Create</strong></span>  
                           </button>
                       </div>
-                      <div className="col-1 text-center">
-                          <button type="button" onClick={this.addMember} className="btn btn-outline-primary btn-block">
+                      <div className="col-2 text-center">
+                          <button type="button" onClick={this.addMember} className="btn btn-light btn-block">
                           <span><strong><i class="fa fa-user-plus"></i> Add</strong></span>   
                           </button>
                       </div>
-                      <div className="col-1 text-center">
-                          <button type="button" onClick={this.changeDeleteButtonSate} className="btn btn-outline-primary btn-block">
+                      <div className="col-2 text-center">
+                          <button type="button" onClick={this.changeDeleteButtonSate} className="btn btn-light btn-block">
                           <span><strong><i class="fa fa-times"></i> Remove</strong></span>  
                           </button>  
                       </div>
@@ -282,8 +306,8 @@ class CreateNewGroupPage extends React.Component
                   </div>
 
                   <div className="PageRow row justify-content-center">
-                        <div className="col-3 text-center">
-                            <button type="button" className="btn btn-outline-secondary btn-block" onClick={this.props.returnToMenuPage} data-toggle="modal" data-target="#exampleModal"> 
+                        <div className="col-4 text-center">
+                            <button type="button" className="btn btn-light btn-block" onClick={this.props.returnToMenuPage}> 
                               Return Home
                             </button>
                         </div>
