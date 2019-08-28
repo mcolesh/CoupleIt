@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../scss/bootstrap.min.css';
-import '../scss/app.css';
+import '../scss/App.css';
 import GroupPage from './GroupPage';
 import { Scrollbars } from 'react-custom-scrollbars';
 
@@ -121,9 +121,9 @@ class SearchFromExistingGroupsPage extends React.Component
                 return group.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1;
             })
             
-            return <div className="Page container text-center">
-                            <div className="PageRow row justify-content-center">
-                                    <div className="col-4  center-block text-center">
+            return <div className="container text-center">
+                            <div className="FirstRowSearchMainPage row justify-content-center">
+                                    <div className="col-12  center-block text-center">
                                     <h2 className="text-primary hr">
                                     &nbsp;&nbsp;&nbsp;Choose your Group:&nbsp;&nbsp;&nbsp; 
                                     </h2>
@@ -138,30 +138,31 @@ class SearchFromExistingGroupsPage extends React.Component
 
                             <div className="PageRow row justify-content-center">
                                 <div className="col-4 text-left">
-                                            <Scrollbars 
-                                            style={{height: 300 }}
-                                            renderTrackHorizontal={props => <div {...props} className="track-horizontal" style={{display:"none"}}/>}
-                                            renderThumbHorizontal={props => <div {...props} className="thumb-horizontal" style={{display:"none"}}/>}
-                                            thumbSize={150}>
-                                              <ul className="list-group">
-                                                  {filteredGroups.map((group,index) => {
-                                                            return <li class="GroupOfItems list-group-item TextColorAndSize" onClick={() => this.moveToGroupPage(group)}>
-                                                                        {group.name}
-                                                                        {this.state.deleteButtonEnabled && 
-                                                                        <button type="button" key={index} class="DeleteButton btn border-0" onClick={this.removeGroup.bind(this, group.name)}>
-                                                                        <span padding-button="15px"><i class="fa fa-trash"></i></span>
-                                                                        </button>}
-                                                                    </li>              
-                                                    },this)}
-                                              </ul>     
-
-                                            </Scrollbars>
+                                  <div className="inBorder">
+                                            <Scrollbars
+                                              style={{height: 300 }}
+                                              renderTrackHorizontal={props => <div {...props} className="track-horizontal" style={{display:"none"}}/>}
+                                              renderThumbHorizontal={props => <div {...props} className="thumb-horizontal" style={{display:"none"}}/>}
+                                              thumbSize={150}>
+                                                <ul className="list-group list-group-searchPage">
+                                                    {filteredGroups.map((group,index) => {
+                                                              return <li class="GroupOfItems list-group-item TextColorAndSize" onClick={() => this.moveToGroupPage(group)}>
+                                                                          {group.name}
+                                                                          {this.state.deleteButtonEnabled && 
+                                                                          <button type="button" key={index} class="DeleteButton btn border-0" onClick={this.removeGroup.bind(this, group.name)}>
+                                                                          <span padding-button="15px"><i class="fa fa-trash"></i></span>
+                                                                          </button>}
+                                                                      </li>              
+                                                      },this)}
+                                                </ul>     
+                                             </Scrollbars>
+                                  </div>
                                 </div>
                             </div>
 
                             <div className="PageRow row justify-content-center">
                                 <div className="col-4">
-                                    <button type="button" className="btn btn-outline-secondary btn-block" onClick={this.changeDeleteButtonSate} data-toggle="modal" data-target="#exampleModal"> 
+                                    <button type="button" className="btn btn-light btn-block" onClick={this.changeDeleteButtonSate} data-toggle="modal" data-target="#exampleModal"> 
                                         Edit Groups
                                     </button>
                                 </div>
@@ -169,7 +170,7 @@ class SearchFromExistingGroupsPage extends React.Component
 
                             <div className="PageRow row justify-content-center">
                                 <div className="col-4">
-                                    <button type="button" className="btn btn-outline-secondary btn-block" onClick={this.props.returnToMenuPage} data-toggle="modal" data-target="#exampleModal"> 
+                                    <button type="button" className="btn btn-light btn-block" onClick={this.props.returnToMenuPage} data-toggle="modal" data-target="#exampleModal"> 
                                         Return Home
                                     </button>
                                 </div>

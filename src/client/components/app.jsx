@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../scss/bootstrap.min.css';
-import '../scss/app.css';
+import '../scss/App.css';
 import CreateNewGroupPage from './CreateNewGroupPage';
 import SearchFromExistingGroupsPage from './SearchFromExistingGroupsPage';
 
@@ -18,7 +18,7 @@ class Menu extends React.Component
   constructor(props) {
     super(props);
     this.state = {
-      currentPage:Page.SEARCH_FROM_EXISTING_GROUPS,
+      currentPage:Page.MENU,
       isVisiable:true};
     this.moveToCreateNewGroupPage = this.moveToCreateNewGroupPage.bind(this);
     this.moveToEnterExistingGroupPage = this.moveToEnterExistingGroupPage.bind(this);
@@ -41,44 +41,45 @@ class Menu extends React.Component
   }
 
   render() {
-    
     switch(this.state.currentPage)
     {
       case Page.MENU:
-        return <div className="Page container text-secondary">
+        return <div className="App">
 
-        <div className="PageRow row justify-content-center">
-            <div className="col-4 center-block text-center hero">
-            <h1 className="text-primary">
-            Couple it
-            </h1>
-            <p className="hr">
-              Helps you to devide your group into pairs ^_^
-            </p>
+              <div className="container">
+                  <div className="FirstRowMainPage row justify-content-center">
+                    <div className="col-4 center-block text-center hero">
+                    <h1 className="text-primary">
+                    Couple it
+                    </h1>
+                    <p className="hr text-secondary Mylogo">
+                      Helps you to devide your group into pairs ^_^
+                    </p>
+                    </div>
+              </div>
+
+              <div className="PageRow row justify-content-center">
+                <div className="col-4">
+
+                    <button type="button" className="btn btn-primary btn-block" onClick={this.moveToEnterExistingGroupPage}>
+                    Enter Existing Group
+                    </button>
+
+                    <button type="button" className="btn btn-primary btn-block" onClick={this.moveToCreateNewGroupPage}> 
+                    Create New Group   
+                    </button>
+
+                </div>
             </div>
-        </div>
-
-        <div className="PageRow row justify-content-center">
-
-          <div className="col-4">
-
-              <button type="button" className="btn btn-outline-primary btn-block" onClick={this.moveToEnterExistingGroupPage}>
-              Enter Existing Group
-              </button>
-
-              <button type="button" className="btn btn-outline-primary btn-block" onClick={this.moveToCreateNewGroupPage}> 
-              Create New Group   
-              </button>
           </div>
-        </div>
 
       </div>
       case Page.SEARCH_FROM_EXISTING_GROUPS:
-        return <div>
+        return <div className="App">
         <SearchFromExistingGroupsPage returnToMenuPage={this.returnToMenuPage}/>
         </div>
       case Page.CREATE_NEW_GROUP:
-        return <div>
+        return <div className="App">
         <CreateNewGroupPage returnToMenuPage={this.returnToMenuPage}/>
         </div>
     }
