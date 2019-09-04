@@ -18,11 +18,189 @@ class SubGroupView extends React.Component
 
     var subGroupView = "./SubGroupScheme/"+this.props.SubGroupSize+strDirection+strGenedersState+".png";
     console.log(subGroupView);
-    return <div><img  className="SubGroupView" src={subGroupView}/></div>
+    return <div style={{margin: "15 0 0 20"}}><img  className="SubGroupView" src={subGroupView}/></div>
   }
 }
 
+class OptionsView extends React.Component
+{
+  constructor(props) {
+    super(props);
+  }
 
+  render()
+  {
+    return <div>
+                  <p style={{margin:"0 0 10 0", textDecoration: "underline"}}>Scheme:</p>
+                  <SubGroupView 
+                  SubGroupSize={this.props.SubGroupSize}
+                  SubGroupDirected={this.props.SubGroupDirected}
+                  GendersTogether={this.props.GendersTogether}
+                  />
+                  <span className="Participants">
+                  <p style={{margin:"0 auto", textDecoration: "underline"}}>Participants:</p>
+                  {this.props.Participants.length>0 ? this.props.Participants : "Please add some participants.."}
+                  </span>
+    </div>
+  }
+}
+
+class SubGroupsLister extends React.Component
+{
+  constructor(props) {
+    super(props)
+  }
+  render()
+  {
+    var isDirected = this.props.SubGroupDirected;
+
+    return this.props.subGroups.map((subGroup) => {
+      return <div>
+              <br/>
+              {
+                subGroup.map((subGroupMember,index,subGroup) => { 
+                  return <span>
+                            {subGroupMember} {subGroup.length - 1 !== index ? 
+                              isDirected ? 
+                                " ⇢ "
+                                :
+                                " — "
+                              :
+                              isDirected ?
+                                " ↩"
+                                :
+                                null
+                              }
+                         </span>
+                  }
+              )}
+             </div>
+   })
+  }
+}
+
+class ResultsView extends React.Component
+{
+  constructor(props) {
+    super(props);
+    this.shuffle = this.shuffle.bind(this);
+    this.createSubGroups = this.createSubGroups.bind(this)
+    this.splitArrayIntoChunks = this.splitArrayIntoChunks.bind(this)
+  }
+
+  shuffle(array) {
+    var currentIndex = array.length, temporaryValue, randomIndex;
+  
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+  
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+  
+      // And swap it with the current element.
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+  
+    return array;
+  }
+
+  splitArrayIntoChunks(array,chunksSize)
+  {
+    var subGroups = [];
+    var i,j,temparray,chunk = chunksSize;
+
+    if (array.length<chunk)
+    {
+        subGroups.push(array)
+        console.log("array.length<chunk", subGroups, array)
+        return subGroups
+    }
+
+    for (i=0,j=array.length; i<j; i+=chunk) {
+        subGroups.push(array.slice(i,i+chunk));
+        console.log("current element",array.slice(i,i+chunk))
+    }
+
+    var lastElemet = subGroups[subGroups.length - 1];
+    console.log("lastElemet",lastElemet)
+    console.log("array before pop",subGroups)
+    if (lastElemet.length <= chunksSize/2)
+    {
+      subGroups.pop();
+      subGroups[subGroups.length - 1].push(lastElemet[0])
+    }
+    
+    return subGroups;
+  }
+
+  createSubGroups(array)
+  {
+    var subGroups = []
+    if (this.props.GendersTogether)
+    {
+      var membersNames = this.props.Participants.map(member => member.name)
+
+      var shuffledMembers = this.shuffle(membersNames);
+
+      subGroups = this.splitArrayIntoChunks(shuffledMembers, this.props.SubGroupSize);
+    }
+    else
+    {
+      var maleMembersNames = this.props.Participants.filter( member => member.sex == 'Male')
+                             .map(member => member.name)
+      var femaleMembersNames = this.props.Participants.filter( member => member.sex == 'Female')
+                             .map(member => member.name)
+      
+      var suffledMaleMembers = this.shuffle(maleMembersNames)
+      var suffledFemaleMembers = this.shuffle(femaleMembersNames)
+
+      var subGroups = [this.splitArrayIntoChunks(suffledMaleMembers,this.props.SubGroupSize),
+                       this.splitArrayIntoChunks(suffledFemaleMembers,this.props.SubGroupSize)]
+    }
+    return subGroups;
+  }
+
+  render()
+  {
+    var subGroups = this.createSubGroups(this.props.Participants)
+
+    return <div>
+                  Sub Groups:
+                  <br/>
+                  {this.props.GendersTogether ?
+                  <SubGroupsLister 
+                  subGroups={subGroups}
+                  SubGroupDirected={this.props.SubGroupDirected}/>
+                  :
+                  <div className="flexContainer">
+                    <div class="flexItem">
+                      <p>
+                        Males:
+                        <br/>
+                        <SubGroupsLister 
+                          subGroups={subGroups[0]}
+                          SubGroupDirected={this.props.SubGroupDirected}
+                        />
+                      </p>
+                    </div>
+                    <div class="flexItem">
+                      <p>
+                        Females:
+                        <br/>
+                        <SubGroupsLister 
+                        subGroups={subGroups[1]}
+                        SubGroupDirected={this.props.SubGroupDirected}
+                        />
+                      </p>
+                    </div>
+                  </div>
+                  }          
+    </div>
+  }
+}
 
 class GroupPage extends React.Component
 {
@@ -30,16 +208,16 @@ class GroupPage extends React.Component
     super(props);
     this.state = {
       allThatNotParticipating: [],
-      SubGroupSize: '2',
+      SubGroupSize: 2,
       SubGroupDirected: false,
-      GendersTogether: false
+      GendersTogether: false,
+      CreateGroupBottonClicked: false,
     }
-    this.changeMemberBackground = this.changeMemberBackground.bind(this);
     this.handleSubGroupsSizeChange = this.handleSubGroupsSizeChange.bind(this);
     this.handleSubGroupsDirectionChange = this.handleSubGroupsDirectionChange.bind(this);
     this.handleSubGroupsNotParticipating = this.handleSubGroupsNotParticipating.bind(this);
     this.setGendersTogether = this.setGendersTogether.bind(this);
-    
+    this.CreateGroupBottonClicked = this.CreateGroupBottonClicked.bind(this)
   }
 
   componentWillMount()
@@ -47,6 +225,11 @@ class GroupPage extends React.Component
     console.log("this.props.group:",JSON.stringify(this.props.group))
   }
   
+  CreateGroupBottonClicked()
+  {
+    this.setState({ CreateGroupBottonClicked: true });
+  }
+
   handleSubGroupsSizeChange(newSubGroupSize)
   {
     this.setState({ SubGroupSize: newSubGroupSize.value });
@@ -73,33 +256,21 @@ class GroupPage extends React.Component
     console.log("Set GendersTogether",event.target)
   }
 
-  changeMemberBackground(event)
-  {
-    console.log(event.target.classList.contains('LiMemberBaseState'));
-
-    if (event.target.classList.contains('LiMemberBaseState'))
-    {
-      event.target.classList.remove('LiMemberBaseState')
-      event.target.classList.add('LiMemberClicked')
-    }
-    else
-    {
-      event.target.classList.remove('LiMemberClicked')
-      event.target.classList.add('LiMemberBaseState')
-    }
-
-    console.log(event.target.classList);
-  }
-
   render()
   {  
     console.log("allThatNotParticipating: ", this.state.allThatNotParticipating);
     console.log("GendersTogether: ",this.state.GendersTogether);
     console.log("SubGroupSize: ",this.state.SubGroupSize);
     console.log("Direction: ",this.state.SubGroupDirected);
-    var participants = this.props.group.groupMembers.map(member => member.name).
+
+    var participantsNames = this.props.group.groupMembers.map(member => member.name).
     filter(member => this.state.allThatNotParticipating.indexOf(member) == -1).
     join(",")
+
+    console.log(participantsNames)
+
+    var participants = this.props.group.groupMembers.
+    filter(member => this.state.allThatNotParticipating.indexOf(member.name) == -1)
 
     var SubGroupDirectionPlaceHolder = this.state.SubGroupDirected ?
      <div><span className="text-secondary"> Directed</span></div> :
@@ -109,8 +280,8 @@ class GroupPage extends React.Component
 
         <div className="FirstRowGroupPage row justify-content-center">
             <div className="col-12 center-block text-center">
-            <h2 className="text-primary hr margin-buttom-20">
-            &nbsp;&nbsp;&nbsp;{this.props.group.name}:&nbsp;&nbsp;&nbsp;
+            <h2 className="text-primary margin-buttom-20">
+              {this.props.group.name}
             </h2>
             </div>
         </div>
@@ -118,7 +289,7 @@ class GroupPage extends React.Component
         <div className="PageRow row justify-content-center">
           <div className="col-10 center-block text-left">
 
-            <h5 style={{paddingBottom : '5px'}}>Sub-Groups Options:</h5>
+            <p style={{marginBottom : '13px', marginTop: '0px', fontSize: "18"}}>Sub-Groups Options:</p>
 
             <div className="RadioOption" onChange={event =>this.setGendersTogether(event)}>
               <label className="radio radioLabel">
@@ -136,10 +307,10 @@ class GroupPage extends React.Component
               <div className="SubGroupSelect">
                 <Select placeholder={this.state.SubGroupSize} onChange={this.handleSubGroupsSizeChange} value={this.state.SubGroupSize} isSearchable={false}
                 options={[
-                { value: '2', label: '2' },
-                { value: '3', label: '3' },
-                { value: '4', label: '4' },
-                { value: '5', label: '5' },
+                { value: 2, label: '2' },
+                { value: 3, label: '3' },
+                { value: 4, label: '4' },
+                { value: 5, label: '5' },
                 ]}
                 />     
               </div>
@@ -158,7 +329,7 @@ class GroupPage extends React.Component
             </div>
 
             <div className="SubGroupsNotParticipating">
-              Not participating:&nbsp;
+              Exclude:&nbsp;
               <div className="NotParticipatingSelect">
                 <ReactMultiSelectCheckboxes onChange={this.handleSubGroupsNotParticipating}
                 options={
@@ -175,30 +346,34 @@ class GroupPage extends React.Component
         <div className="PageRow row justify-content-center">
               <div className="ColGroupPageResults col-10 center-block text-left Results">
                 <Scrollbars style={{height: 450}} autoHide> 
-                  Sub-Group-Scheme:
-                  <br/>
-                  <SubGroupView 
+                  {this.state.CreateGroupBottonClicked ?
+                  <ResultsView
                   SubGroupSize={this.state.SubGroupSize}
                   SubGroupDirected={this.state.SubGroupDirected}
                   GendersTogether={this.state.GendersTogether}
+                  Participants = {participants}
+                  /> :
+                  <OptionsView
+                  SubGroupSize={this.state.SubGroupSize}
+                  SubGroupDirected={this.state.SubGroupDirected}
+                  GendersTogether={this.state.GendersTogether}
+                  Participants = {participantsNames}
                   />
-                  <span className="Participants">Participants:
-                  <br/>
-                  {participants}</span>
+                  }
                 </Scrollbars>
 
               </div>
            </div>
         
-           <div className="PageRow row  justify-content-center" style={{ marginTop: 30 }}>
-                    <div className="col-4">
-                      <button type="button" className="btn btn-primary btn-block" data-toggle="modal" data-target="#exampleModal"> 
+           <div className="PageRow row justify-content-center" style={{ marginTop: 30 }}>
+                    <div className="col-lg-4 col-md-6 col-8">
+                      <button type="button" className="btn btn-primary btn-block" onClick={this.CreateGroupBottonClicked} data-toggle="modal"> 
                         Create Groups
                       </button>
-                      <button type="button" className="btn btn-light btn-block" onClick={this.props.returnToSearchFromExistingGroupPage} data-toggle="modal" data-target="#exampleModal"> 
+                      <button type="button" className="btn btn-outline-primary btn-block" onClick={this.props.returnToSearchFromExistingGroupPage} data-toggle="modal"> 
                         Search another group
                       </button>
-                      <button type="button" className="btn btn-light btn-block" onClick={this.props.returnToMenuPage} data-toggle="modal" data-target="#exampleModal"> 
+                      <button type="button" className="btn btn-outline-primary btn-block" onClick={this.props.returnToMenuPage} data-toggle="modal"> 
                         Return Home
                       </button>
                     </div>

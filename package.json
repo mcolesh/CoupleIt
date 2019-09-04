@@ -4,9 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "postinstall": "webpack -p",
-    "start":"node src/server/index.js",
-	"dev": "./node_modules/.bin/webpack -w"
+    "start": "npm-run-all --parallel watch:server watch:build startDB",
+    "watch:server": "nodemon src/server/index.js",
+    "watch:build": "./node_modules/.bin/webpack -w",
+    "startDB": "md mongo-db & \"D:/mongodb/bin/mongod.exe\" --dbpath mongo-db",
+    "test": "mocha --compilers babel-core/register ./test/*test.js"
   },
   "keywords": [],
   "author": "",
@@ -16,11 +18,6 @@
     "@babel/preset-react": "^7.0.0",
     "babel-preset-stage-1": "^6.24.1",
     "body-parser": "^1.19.0",
-	"babel": "^6.23.0",
-    "babel-core": "^6.26.3",
-    "babel-loader": "^7.1.5",
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-react": "^6.24.1",
     "express": "^4.17.1",
     "mongodb": "^3.3.0-beta2",
     "mongoose": "^5.6.9",
@@ -29,21 +26,23 @@
     "react": "^16.9.0",
     "react-custom-scrollbars": "^4.2.1",
     "react-dom": "^16.9.0",
-    "react-select": "^3.0.4",
-    "npm-run-all": "^4.1.5",
+    "react-multiselect-checkboxes": "^0.1.1",
+    "react-select": "^3.0.4"
+  },
+  "devDependencies": {
+    "babel": "^6.23.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "chai": "^4.2.0",
+    "css-loader": "^3.2.0",
+    "enzyme": "^3.10.0",
+    "mocha": "^6.2.0",
     "node-sass": "^4.12.0",
     "sass-loader": "^7.2.0",
     "style-loader": "^1.0.0",
     "webpack": "^4.39.1",
-    "webpack-cli": "^3.3.6",
-    "chai": "^4.2.0",
-    "css-loader": "^3.2.0",
-    "enzyme": "^3.10.0",
-    "mocha": "^6.2.0"
-  },
-  "devDependencies": {},
-  "engines": {
-    "node": "12.6.0",
-    "npm": "6.9.0"
+    "webpack-cli": "^3.3.6"
   }
 }

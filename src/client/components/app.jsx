@@ -46,26 +46,26 @@ class Menu extends React.Component
       case Page.MENU:
         return <div className="App">
 
-              <div className="container">
-                  <div className="FirstRowMainPage row justify-content-center">
-                    <div className="col-4 center-block text-center hero">
+              <div className="locateMainPage boxContainer container">
+                  <div className="row justify-content-center">
+                    <div className="col-12 center-block text-center hero">
                     <h1 className="text-primary">
                     Couple it
                     </h1>
                     <p className="hr text-secondary Mylogo">
-                      Helps you to devide your group into pairs ^_^
+                      Split your group into smaller groups
                     </p>
                     </div>
               </div>
 
               <div className="PageRow row justify-content-center">
-                <div className="col-4">
+                <div className="col-10">
 
                     <button type="button" className="btn btn-primary btn-block" onClick={this.moveToEnterExistingGroupPage}>
-                    Enter Existing Group
+                    Groups
                     </button>
 
-                    <button type="button" className="btn btn-primary btn-block" onClick={this.moveToCreateNewGroupPage}> 
+                    <button type="button" className="btn btn-outline-primary btn-block" onClick={this.moveToCreateNewGroupPage}> 
                     Create New Group   
                     </button>
 
