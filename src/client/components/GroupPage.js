@@ -4,6 +4,7 @@ import Select from 'react-select';
 import ReactMultiSelectCheckboxes from 'react-multiselect-checkboxes';
 import '../scss/bootstrap.min.css';
 import '../scss/App.css';
+import ReturnHomeButton from './ReturnHomeButton'
 
 class SubGroupView extends React.Component
 {
@@ -287,10 +288,13 @@ class GroupPage extends React.Component
         </div>
 
         <div className="PageRow row justify-content-center">
+
           <div className="col-10 center-block text-left">
+              <p style={{marginBottom : '13px', marginTop: '0px', fontSize: "18"}}>Sub-Groups Options:</p>
+          </div>
 
-            <p style={{marginBottom : '13px', marginTop: '0px', fontSize: "18"}}>Sub-Groups Options:</p>
-
+          <div className="col-10 center-block text-left">
+            Separation:&nbsp;&nbsp;
             <div className="RadioOption" onChange={event =>this.setGendersTogether(event)}>
               <label className="radio radioLabel">
               <input type="radio" name="gendersPreference" id="gendersSeperated" defaultChecked/>
@@ -370,15 +374,25 @@ class GroupPage extends React.Component
                       <button type="button" className="btn btn-primary btn-block" onClick={this.CreateGroupBottonClicked} data-toggle="modal"> 
                         Create Groups
                       </button>
+                    </div>
+             </div>
+
+             <div className="PageRow row justify-content-center">
+                    <div className="col-lg-4 col-md-6 col-8">
                       <button type="button" className="btn btn-outline-primary btn-block" onClick={this.props.returnToSearchFromExistingGroupPage} data-toggle="modal"> 
                         Search another group
                       </button>
-                      <button type="button" className="btn btn-outline-primary btn-block" onClick={this.props.returnToMenuPage} data-toggle="modal"> 
-                        Return Home
-                      </button>
                     </div>
-         </div>
-        
+             </div>  
+
+             <div className="PageRow row justify-content-center">
+                    <div className="col-lg-4 col-md-6 col-8">
+                      <ReturnHomeButton
+                      returnToMenuPage = {this.props.returnToMenuPage}
+                      messageBody = { "Division into groups would be lost" }
+                      />
+                    </div>
+             </div>        
         </div>
   }
 }

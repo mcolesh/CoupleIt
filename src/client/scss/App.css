@@ -8,6 +8,37 @@
   font-family: 'Open Sans', sans-serif;
 }
 
+.App
+{
+  background-image: linear-gradient(to top, #dfe9f3 0%, white 100%);
+  min-height: 100%;
+  min-width: 100%;
+  overflow:hidden;
+}
+
+.mainPage{
+  margin-top: 150px;
+  background-image: url('/images/89517.png');
+  background-position: center;
+  min-height: 700px;
+  min-width: 700px;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.mainPageHeader{
+  padding-top: 256px;
+}
+
+.mainPageHeader .hr:after{
+  display: inline-block;
+  width: 50%
+}
+
+.mainPageFooter{
+
+}
+
 h1, h2{
   font-family: 'Montserrat', sans-serif !important;
 }
@@ -29,6 +60,10 @@ h1, h2{
   box-shadow: 5px 5px 4px #6666;
 }
 
+.peopleCollectionBackground{
+
+}
+
 .createContainer{
 
 }
@@ -45,7 +80,7 @@ h1, h2{
 
 @media (min-width: 480px) {
   .createContainer{
-      width:480px;
+      width:445px;
   }}
 
 @media (min-width: 810px) {
@@ -88,25 +123,6 @@ h1, h2{
 }
 .p-2{
   padding-right: 2rem !important;
-}
-
-.App
-{
-  background-image: url('/images/89517.jpg');
-  background-position: center;
-  min-height: 100%;
-  min-width: 100%;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
-.locateMainPage{
-  padding-top: 15%
-}
-
-.locateMainPage .hr:after{
-  display: inline-block;
-  width: 50%
 }
 
 .FirstRowSearchMainPage{
@@ -269,7 +285,7 @@ p {
 }
 
 .GroupMembersContainer:first-child{
-  padding-top:0px;
+  padding-top:0px !important;
 }
 
 .GroupsPageRow{
@@ -418,7 +434,7 @@ p {
 .track-vertical{
   position: absolute;
   width: 6px;
-  right: 9% !important;
+  right: 2px !important;
   bottom: 2px !important;
   top: 2px !important;
   border-radius: 3px !important;

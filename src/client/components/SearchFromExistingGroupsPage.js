@@ -4,6 +4,7 @@ import '../scss/App.css';
 import GroupPage from './GroupPage';
 import { Scrollbars } from 'react-custom-scrollbars';
 import Header from './HeaderComponent'
+import ReturnHomeButton from './ReturnHomeButton'
 
 class Group {
     constructor(name) {

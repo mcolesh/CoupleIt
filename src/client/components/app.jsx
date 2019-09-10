@@ -45,34 +45,41 @@ class Menu extends React.Component
     {
       case Page.MENU:
         return <div className="App">
+                <div className="mainPage boxContainer container">
 
-              <div className="locateMainPage boxContainer container">
-                  <div className="row justify-content-center">
-                    <div className="col-12 center-block text-center hero">
-                    <h1 className="text-primary">
-                    Couple it
-                    </h1>
-                    <p className="hr text-secondary Mylogo">
-                      Split your group into smaller groups
-                    </p>
-                    </div>
-              </div>
+                        <div className="mainPageHeader row justify-content-center">
+                          <div className="col-12 center-block text-center hero">
+                          <h1 className="text-primary">
+                          CoupleIt
+                          </h1>
+                          <p className="hr text-secondary Mylogo">
+                            Splits groups into smaller groups
+                          </p>
+                          </div>
+                        </div>
 
-              <div className="PageRow row justify-content-center">
-                <div className="col-10">
+                        <div className="PageRow row justify-content-center">
+                            <div className="col-5">
 
-                    <button type="button" className="btn btn-primary btn-block" onClick={this.moveToEnterExistingGroupPage}>
-                    Groups
-                    </button>
+                            <button type="button" className="btn btn-primary btn-block" onClick={this.moveToEnterExistingGroupPage}>
+                            Groups
+                            </button>
 
-                    <button type="button" className="btn btn-outline-primary btn-block" onClick={this.moveToCreateNewGroupPage}> 
-                    Create New Group   
-                    </button>
+                            <button type="button" className="btn btn-outline-primary btn-block" onClick={this.moveToCreateNewGroupPage}> 
+                            Create New Group   
+                            </button>
 
-                </div>
-            </div>
-          </div>
+                            </div>
+                        </div>
+                        <div className="mainPageFooter PageRow row justify-content-center">
 
+                          <div className="col-12 center-block text-center hero">
+                            <p className="text-secondary Mylogo">
+                            </p>
+                          </div>
+                        </div>
+                        
+                  </div>
       </div>
       case Page.SEARCH_FROM_EXISTING_GROUPS:
         return <div className="App">
