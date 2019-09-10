@@ -2,7 +2,7 @@ import ReactDOM from 'react-dom';
 import React, { Component } from 'react'
 import { Button, Modal } from 'react-bootstrap';
 
-class ReturnHomeButton extends React.Component
+class ModalMessage extends React.Component
 {
     constructor(props) {
       super(props);
@@ -23,7 +23,7 @@ class ReturnHomeButton extends React.Component
       return <div>
 
           <Button type="button" variant="outline-primary btn-block" onClick={handleShow}>
-            Return Home
+            {this.props.buttonText}
           </Button>
           <Modal 
           show={this.state.show} 
@@ -37,8 +37,8 @@ class ReturnHomeButton extends React.Component
               <Button variant="secondary" onClick={handleClose}>
                 Close
               </Button>
-              <Button variant="primary" onClick={this.props.returnToMenuPage}>
-                Return Home
+              <Button variant="primary" onClick={this.props.movePageAction}>
+                Return {this.props.pageName}
               </Button>
             </Modal.Footer>
           </Modal>
@@ -46,4 +46,4 @@ class ReturnHomeButton extends React.Component
     }
 }
 
-export default ReturnHomeButton;
+export default ModalMessage;

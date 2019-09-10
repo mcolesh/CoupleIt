@@ -4,7 +4,7 @@ import Select from 'react-select';
 import ReactMultiSelectCheckboxes from 'react-multiselect-checkboxes';
 import '../scss/bootstrap.min.css';
 import '../scss/App.css';
-import ReturnHomeButton from './ReturnHomeButton'
+import ModalMessage from './ModalMessage'
 
 class SubGroupView extends React.Component
 {
@@ -379,17 +379,22 @@ class GroupPage extends React.Component
 
              <div className="PageRow row justify-content-center">
                     <div className="col-lg-4 col-md-6 col-8">
-                      <button type="button" className="btn btn-outline-primary btn-block" onClick={this.props.returnToSearchFromExistingGroupPage} data-toggle="modal"> 
-                        Search another group
-                      </button>
+                      <ModalMessage
+                              buttonText = {"Search another group"}
+                              pageName = {"Groups"}
+                              messageBody = {"Group data would be lost..."}
+                              movePageAction = {this.props.returnToSearchFromExistingGroupPage}       
+                      />
                     </div>
              </div>  
 
              <div className="PageRow row justify-content-center">
                     <div className="col-lg-4 col-md-6 col-8">
-                      <ReturnHomeButton
-                      returnToMenuPage = {this.props.returnToMenuPage}
-                      messageBody = { "Division into groups would be lost" }
+                      <ModalMessage
+                      buttonText = {"Return Home"}
+                      pageName = {"Home"}
+                      messageBody = {"Division into groups would be lost"}
+                      movePageAction = {this.props.returnToMenuPage}
                       />
                     </div>
              </div>        

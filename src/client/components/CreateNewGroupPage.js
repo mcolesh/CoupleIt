@@ -4,7 +4,7 @@ import '../scss/application.scss';
 import '../scss/App.css';
 import { Scrollbars } from 'react-custom-scrollbars';
 import Header from './HeaderComponent'
-import ReturnHomeButton from './ReturnHomeButton'
+import ModalMessage from './ModalMessage'
 
 
 /*
@@ -345,10 +345,12 @@ class CreateNewGroupPage extends React.Component
 
                     <div className="PageRow row">
                           <div className="col text-center">
-                              <ReturnHomeButton
-                              returnToMenuPage = {this.props.returnToMenuPage}
-                              messageBody = {"Group data would be lost..."}
-                              />
+                            <ModalMessage
+                              buttonText = {"Return Home"}
+                              pageName = {"Home"}
+                              messageBody = {"Division into groups would be lost"}
+                              movePageAction = {this.props.returnToMenuPage}
+                            />
                           </div>
 
                     </div>
