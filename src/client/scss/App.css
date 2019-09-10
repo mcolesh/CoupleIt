@@ -439,3 +439,33 @@ p {
   top: 2px !important;
   border-radius: 3px !important;
 }
+
+.femaleBorder{
+  border-radius: 10px;
+  border-color:#9837be;
+  border-style: solid;
+  background: #fd3992;
+  color:white;
+  display: inline-block;
+  margin-top:10px;
+}
+
+.maleBorder{
+  border-radius: 10px;
+  border-color:#333a93;
+  border-style: solid;
+  background: #3398fe;
+  color:white;
+  display: inline-block;
+  margin-top:10px;
+}
+
+.maleAndFemaleBorader{
+  border-radius: 10px;
+  border-style: solid;
+  border-color: darkgrey;
+  background: #6c757d;
+  color:white;
+  display: inline-block;
+  margin-top:10px;
+}

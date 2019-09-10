@@ -61,7 +61,7 @@ class SubGroupsLister extends React.Component
               {
                 subGroup.map((subGroupMember,index,subGroup) => { 
                   return <span>
-                            {subGroupMember} {subGroup.length - 1 !== index ? 
+                            <div className={this.props.border}>&nbsp;&nbsp;{subGroupMember}&nbsp;&nbsp;</div> {subGroup.length - 1 !== index ? 
                               isDirected ? 
                                 " ⇢ "
                                 :
@@ -173,6 +173,7 @@ class ResultsView extends React.Component
                   <br/>
                   {this.props.GendersTogether ?
                   <SubGroupsLister 
+                  border={"maleAndFemaleBorader"} 
                   subGroups={subGroups}
                   SubGroupDirected={this.props.SubGroupDirected}/>
                   :
@@ -181,7 +182,8 @@ class ResultsView extends React.Component
                       <p>
                         Males:
                         <br/>
-                        <SubGroupsLister 
+                        <SubGroupsLister
+                          border={"maleBorder"} 
                           subGroups={subGroups[0]}
                           SubGroupDirected={this.props.SubGroupDirected}
                         />
@@ -192,6 +194,7 @@ class ResultsView extends React.Component
                         Females:
                         <br/>
                         <SubGroupsLister 
+                        border={"femaleBorder"} 
                         subGroups={subGroups[1]}
                         SubGroupDirected={this.props.SubGroupDirected}
                         />
