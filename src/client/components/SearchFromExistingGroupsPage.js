@@ -43,7 +43,8 @@ class SearchFromExistingGroupsPage extends React.Component
         groupOfItemsView: "GroupOfItems list-group-item TextColorAndSize",
         currentPage: Page.SEARCH_MENU,
         groups: [],
-        chosenGroup : null
+        chosenGroup : null,
+        componentWillMountFinished:false,
     }
 
     this.updateSearch = this.updateSearch.bind(this);
@@ -70,8 +71,13 @@ class SearchFromExistingGroupsPage extends React.Component
         }
         allGroups.push(currentGroup)
     }
-    
-    this.setState({groups: allGroups});
+
+    if (typeof this.props.newGroupName !== 'undefined'){
+      this.moveToGroupPage(allGroups.filter( Group => Group.name == this.props.newGroupName)[0])
+    }
+
+    this.setState({groups: allGroups,componentWillMountFinished:true});
+
   }
 
   updateSearch(event)
@@ -112,7 +118,7 @@ class SearchFromExistingGroupsPage extends React.Component
     if (this.state.deleteButtonEnabled)
         return
         
-    this.setState({chosenGroup: group, currentPage: Page.CHOSEN_GROUP})
+    this.setState({currentPage: Page.CHOSEN_GROUP,chosenGroup: group})
   }
 
   returnToSearchFromExistingGroupPage()
@@ -121,6 +127,12 @@ class SearchFromExistingGroupsPage extends React.Component
   }
 
   render() {
+
+    if (this.state.componentWillMountFinished == false)
+    return <div class="loader spinner-border text-primary" role="status">
+               <span class="sr-only">Loading...</span>
+           </div>
+
     switch(this.state.currentPage)
     {
         case Page.SEARCH_MENU:

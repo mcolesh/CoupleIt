@@ -10,7 +10,7 @@
 
 .App
 {
-  background-image: linear-gradient(to top, #dfe9f3 0%, white 100%);
+  background: #f5f9fa;
   min-height: 100%;
   min-width: 100%;
   overflow:hidden;
@@ -463,9 +463,20 @@ p {
 .maleAndFemaleBorader{
   border-radius: 10px;
   border-style: solid;
-  border-color: darkgrey;
-  background: #6c757d;
-  color:white;
+  border-color: #007bff;
+  background: white;
+  color: #007bff;;
   display: inline-block;
   margin-top:10px;
+}
+
+.loader {
+  width: 100px;
+  height: 100px;
+  margin:auto;
+  top:0;
+  left:0;
+  bottom:50%;
+  right:0;
+  position:absolute;
 }

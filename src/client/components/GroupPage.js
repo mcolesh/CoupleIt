@@ -383,9 +383,10 @@ class GroupPage extends React.Component
              <div className="PageRow row justify-content-center">
                     <div className="col-lg-4 col-md-6 col-8">
                       <ModalMessage
+                              enableModal = {this.state.CreateGroupBottonClicked}
                               buttonText = {"Search another group"}
                               pageName = {"Groups"}
-                              messageBody = {"Group data would be lost..."}
+                              messageBody = {"Group's division would be lost.."}
                               movePageAction = {this.props.returnToSearchFromExistingGroupPage}       
                       />
                     </div>
@@ -394,9 +395,10 @@ class GroupPage extends React.Component
              <div className="PageRow row justify-content-center">
                     <div className="col-lg-4 col-md-6 col-8">
                       <ModalMessage
+                      enableModal = {this.state.CreateGroupBottonClicked}
                       buttonText = {"Return Home"}
                       pageName = {"Home"}
-                      messageBody = {"Division into groups would be lost"}
+                      messageBody = {"Group's division would be lost.."}
                       movePageAction = {this.props.returnToMenuPage}
                       />
                     </div>

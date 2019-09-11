@@ -5,7 +5,7 @@ import '../scss/App.css';
 import { Scrollbars } from 'react-custom-scrollbars';
 import Header from './HeaderComponent'
 import ModalMessage from './ModalMessage'
-
+import SearchFromExistingGroupsPage from './SearchFromExistingGroupsPage';
 
 /*
 InnerChildImage:
@@ -66,12 +66,7 @@ class FieldsAreFilled extends React.Component
     ];
 
     allAlerts = [
-      ...(this.props.isNumberOfMembersGreaterOrEqualToThree == false ? [this.NumberOfMembersGreaterOrEqualToThreeAlert] : [])
-      ,...allAlerts
-    ];
-
-    allAlerts = [
-      ...(this.props.isNumberOfMembersGreaterOrEqualToThree == false ? [this.NumberOfMembersGreaterOrEqualToThreeAlert] : [])
+      ...(this.props.groupNameIsUnique == false ? [this.groupNameIsUniqueAlert] : [])
       ,...allAlerts
     ];
 
@@ -115,6 +110,7 @@ class CreateNewGroupPage extends React.Component
       groupMembersAreUnique: null,
       deleteButtonEnabled: false,
       isGroupCreated:false,
+      moveToGroupPage:false,
     };
     this.existingGroups = []
     this.handleRemove = this.handleRemove.bind(this);
@@ -170,7 +166,7 @@ class CreateNewGroupPage extends React.Component
       this.setState({GroupMembers: []})
   }
 
-  handleSubmit()
+  async handleSubmit()
   {
     var isNumberOfMembersGreaterOrEqualToThree = false
     var fieldsAreFilled = false 
@@ -227,9 +223,7 @@ class CreateNewGroupPage extends React.Component
      
     this.existingGroups.push(this.state.GroupName);
     
-    this.setState({isGroupCreated:true})
-
-    fetch('/api/groups', {
+    await fetch('/api/groups', {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
@@ -238,6 +232,12 @@ class CreateNewGroupPage extends React.Component
       body: newGroup,
     });
 
+    this.setState({isGroupCreated:true})
+    
+    setTimeout(() => {
+      this.setState({ moveToGroupPage: true });
+    }, 1500);
+
     console.dir("Created Group: " + newGroup);
   }
 
@@ -245,6 +245,17 @@ class CreateNewGroupPage extends React.Component
 
     if (!this.state.isVisible)
       return null
+
+
+    if(this.state.moveToGroupPage)
+    {
+      return <div className="App">
+                <SearchFromExistingGroupsPage 
+                newGroupName = {this.state.GroupName}
+                returnToMenuPage={this.props.returnToMenuPage}
+                />
+              </div>
+    }
 
     return <div>
                 <Header 
@@ -319,36 +330,37 @@ class CreateNewGroupPage extends React.Component
                         </div>
                     </div>
 
-                    <div className="row" style={{marginTop:40}}>
+                    <div className="row justify-content-center" style={{marginTop:40}}>
 
-                      <div className="col-6 text-center">
+                      <div className="col-5 text-center">
                               <button type="button" onClick={this.addMember} className="btn btn-outline-primary btn-block">
-                              <span><strong><i class="fa fa-user-plus"></i> Add</strong></span>   
+                              <span><i class="fa fa-user-plus"></i> Add</span>   
                               </button>
                       </div>
 
-                      <div className="col-6 text-center">
+                      <div className="col-5 text-center">
                               <button type="button" onClick={this.removeAllGroupMembers} className="btn btn-outline-primary btn-block" disabled={this.state.GroupMembers.length == 0}>
-                              <span><strong><i class="fa fa-times"></i> Remove All</strong></span>  
+                              <span><i class="fa fa-times"></i> Remove All</span>  
                               </button>  
                       </div>
 
                     </div>
 
-                    <div className="PageRowCreateNewGroupFooter row">
-                      <div className="col text-center">
+                    <div className="PageRowCreateNewGroupFooter row justify-content-center">
+                      <div className="col-10 text-center">
                               <button type="button" onClick={(e)=>this.handleSubmit(e)} className="btn btn-primary btn-block">
-                              <span><strong><i class="fa fa-check"></i> Create</strong></span>  
+                              <span><i class="fa fa-check"></i> Create</span>  
                               </button>
                       </div>
                     </div>
 
-                    <div className="PageRow row">
-                          <div className="col text-center">
+                    <div className="PageRow row justify-content-center">
+                          <div className="col-10 text-center">
                             <ModalMessage
+                              enableModal = {!this.state.isGroupCreated}
                               buttonText = {"Return Home"}
                               pageName = {"Home"}
-                              messageBody = {"Division into groups would be lost"}
+                              messageBody = {"Group data would be lost..."}
                               movePageAction = {this.props.returnToMenuPage}
                             />
                           </div>

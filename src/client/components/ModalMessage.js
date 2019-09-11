@@ -19,7 +19,12 @@ class ModalMessage extends React.Component
     
       const handleClose = () => this.setShowaaa(false);
       const handleShow = () => this.setShowaaa(true);
- 
+    
+      if(this.props.enableModal === false)
+        return <button type="button" className="btn btn-outline-primary btn-block" onClick={this.props.movePageAction}> 
+        {this.props.buttonText}
+      </button>
+
       return <div>
 
           <Button type="button" variant="outline-primary btn-block" onClick={handleShow}>
